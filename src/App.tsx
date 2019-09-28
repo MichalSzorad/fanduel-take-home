@@ -1,9 +1,13 @@
 import React from 'react';
+import { fetchPlayers } from './api';
+import GamePage from './game-page';
 
 function App() {
-  return <div>
-    <h1>Hello World!</h1>
-  </div>;
+  React.useEffect(() => {
+    fetchPlayers().then(res => console.log(res)).catch(e => console.error(e));
+  }, []);
+
+  return <GamePage />;
 }
 
 export default App;
