@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { fetchPlayers } from './api';
 import { Player } from './player';
+import { State } from './store';
 
 export type Actions = LoadGameBegin | LoadGameRejected | LoadGameSuccess | ResetGame | MakeCorrectGuess | PickRandomPlayers;
 
@@ -30,7 +31,7 @@ interface PickRandomPlayers {
     payload: { playerIds: string[] };
 }
 
-export function makeGuess(): MakeCorrectGuess {
+export function makeCorrectGuess(): MakeCorrectGuess {
     return { type: 'game/make-correct-guess' };
 }
 
@@ -52,11 +53,4 @@ export function loadGameSuccess(players: Player[]): LoadGameSuccess {
 
 export function pickRandomPlayers(playerIds: string[]): PickRandomPlayers {
     return { type: 'game/pick-random-players', payload: { playerIds } };
-}
-
-export function initGame(dispatch: Dispatch) {
-    dispatch(loadGameBegin());
-    fetchPlayers()
-        .then(players => dispatch(loadGameSuccess(players)))
-        .catch(error => dispatch(loadGameRejected()));
 }

@@ -1,7 +1,7 @@
 import { combineReducers, createStore, Reducer } from 'redux';
 import { Actions as GameActions, reducer as gameReducer, State as GameState } from './game';
 
-interface AppState {
+export interface AppState {
     game: GameState;
 }
 

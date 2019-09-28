@@ -22,7 +22,9 @@ export function reducer(state: State = initialState, action: Actions): State {
         case 'game/load-success': return { ...state, initState: 'initialized', players: action.payload.players };
         case 'game/make-correct-guess': return { ...state, correctGuesses: state.correctGuesses + 1 };
         case 'game/pick-random-players': return { ...state, randomPlayers: action.payload.playerIds };
+        case 'game/reset': return { ...state, randomPlayers: [], correctGuesses: 0 };
     }
+
     return state;
 }
 

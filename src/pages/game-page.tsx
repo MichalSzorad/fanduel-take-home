@@ -1,32 +1,44 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 import styled from 'styled-components';
-import PlayerCard from './player-card';
+import { Player } from '../game';
+import PlayerCard from '../player-card';
 
-export default function GamePage() {
+interface Props {
+    randomPlayers: Player[];
+    initGame(): void;
+}
+
+export default function GamePage(props: Props) {
+    const { randomPlayers, initGame } = props;
+
+    React.useEffect(() => {
+        initGame();
+    }, []);
+
     return <div>
         <Wrapper>
             <Container>
                 <Heading>Pick a player with higher FanDuel Points Per Game (FPPG)</Heading>
             </Container>
-            <Container>
+            {randomPlayers.length !== 0 && <Container>
                 <Row>
                     <Col md={6}>
                         <PlayerCard
-                            name="Kyle Lowry"
-                            imageUrl="https://d17odppiik753x.cloudfront.net/playerimages/nba/9535.png"
-                            id="15475-9535"
+                            name={randomPlayers[0].name}
+                            imageUrl={randomPlayers[0].imageUrl}
+                            id={randomPlayers[0].id}
                         />
                     </Col>
                     <Col md={6}>
                         <PlayerCard
-                            name="Dwyane Wade"
-                            imageUrl="https://d17odppiik753x.cloudfront.net/playerimages/nba/9585.png"
-                            id="15475-9585"
+                            name={randomPlayers[1].name}
+                            imageUrl={randomPlayers[1].imageUrl}
+                            id={randomPlayers[1].id}
                         />
                     </Col>
                 </Row>
-            </Container>
+            </Container>}
 
         </Wrapper>
     </div>;

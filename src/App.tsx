@@ -1,8 +1,12 @@
 import React from 'react';
-import GamePage from './game-page';
+import { Provider } from 'react-redux';
+import { GamePageConnected } from './pages';
+import store from './store';
 
 function App() {
-  return <GamePage />;
+  return <Provider store={store}>
+    <GamePageConnected />
+  </Provider>;
 }
 
 export default App;

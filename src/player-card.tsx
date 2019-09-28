@@ -10,7 +10,7 @@ interface Props {
 export default function PlayerCard(props: Props) {
     return <Wrapper>
         <Name>{props.name}</Name>
-        <Image src={props.imageUrl} />
+        <Image src={props.imageUrl} width={200} height={200} />
         <span>{props.id}</span>
     </Wrapper>;
 }

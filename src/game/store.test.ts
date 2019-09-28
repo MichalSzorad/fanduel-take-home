@@ -1,4 +1,4 @@
-import { Actions, loadGameBegin, loadGameRejected, loadGameSuccess, makeGuess, resetGame } from './actions';
+import { Actions, loadGameBegin, loadGameRejected, loadGameSuccess, makeCorrectGuess, resetGame } from './actions';
 import { Player } from './player';
 import { reducer, State } from './store';
 
