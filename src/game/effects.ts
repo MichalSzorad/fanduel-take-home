@@ -15,9 +15,10 @@ export function initGame(dispatch: Dispatch) {
 
 export function generateRandomPlayers(players: Player[]) {
     const ids = players.map(p => p.id);
+    const firstPick = getRandomValue(ids);
+    const secondPick = getRandomValue(ids.filter(id => id !== firstPick));
 
-    // TODO: make sure user can not pick one player twice
-    return pickRandomPlayers([getRandomValue(ids), getRandomValue(ids)]);
+    return pickRandomPlayers([firstPick, secondPick]);
 }
 
 function getRandomValue<T>(array: T[]): T {

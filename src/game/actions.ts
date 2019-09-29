@@ -1,9 +1,6 @@
-import { Dispatch } from 'redux';
-import { fetchPlayers } from './api';
 import { Player } from './player';
-import { State } from './store';
 
-export type Actions = LoadGameBegin | LoadGameRejected | LoadGameSuccess | ResetGame | MakeCorrectGuess | PickRandomPlayers;
+export type Actions = LoadGameBegin | LoadGameRejected | LoadGameSuccess | ResetStats | MakeGuess | PickRandomPlayers;
 
 interface LoadGameBegin {
     readonly type: 'game/load-begin';
@@ -18,12 +15,13 @@ interface LoadGameSuccess {
     payload: { players: Player[] };
 }
 
-interface ResetGame {
-    readonly type: 'game/reset';
+interface ResetStats {
+    readonly type: 'game/reset-stats';
 }
 
-interface MakeCorrectGuess {
-    readonly type: 'game/make-correct-guess';
+interface MakeGuess {
+    readonly type: 'game/make-guess';
+    payload: { playerId: string };
 }
 
 interface PickRandomPlayers {
@@ -31,12 +29,12 @@ interface PickRandomPlayers {
     payload: { playerIds: string[] };
 }
 
-export function makeCorrectGuess(): MakeCorrectGuess {
-    return { type: 'game/make-correct-guess' };
+export function makeGuess(playerId: string): MakeGuess {
+    return { type: 'game/make-guess', payload: { playerId } };
 }
 
-export function resetGame(): ResetGame {
-    return { type: 'game/reset' };
+export function resetStats(): ResetStats {
+    return { type: 'game/reset-stats' };
 }
 
 export function loadGameBegin(): LoadGameBegin {
