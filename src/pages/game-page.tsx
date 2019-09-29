@@ -1,8 +1,9 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-grid-system';
 import styled from 'styled-components';
+import { Button } from '../components';
+import PlayerCard from '../components/player-card';
 import { Player } from '../game';
-import PlayerCard from '../player-card';
 
 interface Props {
     randomPlayers: Player[];
@@ -55,10 +56,10 @@ export default function GamePage(props: Props) {
                     />
                 </Col>)}
                 </Row>
-                {guess && isGuessCorrect ? <Row><b>You guessed it Right!</b></Row> : null}
-                {guess && !isGuessCorrect ? <Row><b>Your guess was bad. Try it again!</b></Row> : null}
-                {guess && !hasGameEnded ? <Row><button onClick={handleContinueClick}>CONTINUE</button></Row> : null}
-                {hasGameEnded && <button onClick={handlePlayAgainClick}>PLAY AGAIN</button>}
+                {guess && isGuessCorrect ? <Row><Col><GuessResult>You guessed it Right!</GuessResult></Col></Row> : null}
+                {guess && !isGuessCorrect ? <Row><Col><GuessResult>Your guess was bad. Try it again!</GuessResult></Col></Row> : null}
+                {guess && !hasGameEnded ? <Row><Col><Button onClick={handleContinueClick}>CONTINUE</Button></Col></Row> : null}
+                {hasGameEnded && <Row><Col><Button onClick={handlePlayAgainClick}>PLAY AGAIN</Button></Col></Row>}
             </Container>}
         </Wrapper>
     </div>;
@@ -68,12 +69,19 @@ const Heading = styled.h1`
     color: #333333;
 `;
 
+const GuessResult = styled.span`
+    font-weight: bold;
+    margin: 10px;
+    display: inline-block;
+`;
+
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     min-height: 100vh;
+    text-align: center;
 `;
 
 function formatFppg(fppg: number): string {

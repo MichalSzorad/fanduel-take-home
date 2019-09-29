@@ -6,7 +6,7 @@ type BackgroundType = 'normal' | 'wrong' | 'correct';
 interface Props {
     imageUrl: string;
     name: string;
-    fppg?: string;
+    fppg: string;
     background?: BackgroundType;
     onChoose?(): void;
 }
@@ -14,7 +14,7 @@ interface Props {
 export default function PlayerCard(props: Props) {
     return <Wrapper onClick={props.onChoose} background={getBackgroundColor(props.background || 'normal')}>
         <Name>{props.name}</Name>
-        <Image src={props.imageUrl} width={200} height={200} />
+        <Image src={props.imageUrl} width={200} height={200} alt={props.name} />
         <Fppg>FPPG: {props.fppg}</Fppg>
     </Wrapper>;
 }
