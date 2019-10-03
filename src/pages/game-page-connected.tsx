@@ -17,7 +17,6 @@ function mapStateToProps(state: AppState) {
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {
-    // TODO: do not touch the store
     const pickRandomPlayers = () => dispatch(generateRandomPlayers(store.getState().game.players));
     return {
         initGame: () => initGame(dispatch),

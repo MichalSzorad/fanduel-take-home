@@ -12,18 +12,18 @@ interface Props {
 }
 
 export default function PlayerCard(props: Props) {
-    return <Wrapper onClick={props.onChoose} background={getBackgroundColor(props.background || 'normal')}>
+    return <Wrapper onClick={props.onChoose} background={props.background || 'normal'}>
         <Name>{props.name}</Name>
         <Image src={props.imageUrl} width={200} height={200} alt={props.name} />
         <Fppg>FPPG: {props.fppg}</Fppg>
     </Wrapper>;
 }
 
-const Wrapper = styled.div<{ background: string }>`
+const Wrapper = styled.div<{ background: BackgroundType }>`
     align-items: center;
-    background: ${props => props.background};
+    background: ${props => props.theme.colors.card[props.background]};
     border-radius: 3px;
-    color: #FFFFFF;
+    color: ${props => props.theme.colors.second};
     cursor: pointer;
     display: inline-flex;
     flex-direction: column;
@@ -40,9 +40,22 @@ const Wrapper = styled.div<{ background: string }>`
     }
 `;
 
+Wrapper.defaultProps = {
+    theme: {
+        colors: {
+            second: '#FFFFFF',
+            card: {
+                normal: 'blue',
+                wrong: 'red',
+                correct: 'green',
+            },
+        },
+    },
+};
+
 const Image = styled.img`
-    max-height: 150px;
-    max-width: 150px;
+    max-height: 200px;
+    max-width: 200px;
 `;
 
 const Name = styled.span`
@@ -55,11 +68,3 @@ const Fppg = styled.span`
     font-style: italic;
     padding-top: 10px;
 `;
-
-function getBackgroundColor(color: BackgroundType): string {
-    switch (color) {
-        case 'correct': return '#0c8c29';
-        case 'normal': return '#1393FF';
-        case 'wrong': return '#b73526';
-    }
-}

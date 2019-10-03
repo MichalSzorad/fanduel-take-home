@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Button = styled.button`
     padding: 10px 20px;
-    background: #1393FF;
-    color: #FFFFFF;
+    background: ${props => props.theme.colors.main};
+    color: ${props => props.theme.colors.second};
     font-weight: bold;
     border-radius: 5px;
     border: 0;
@@ -14,7 +14,7 @@ const Button = styled.button`
     outline: none;
 
     :hover {
-        background: #0768b9;
+        background: ${props => props.theme.colors.mainActive};
     }
 
     :active {
@@ -22,5 +22,14 @@ const Button = styled.button`
         box-shadow: -1px 1px 3px #00000033;
     }
 `;
+
+Button.defaultProps = {
+    theme: {
+        colors: {
+            main: 'blue',
+            second: 'white',
+        },
+    },
+};
 
 export default Button;
